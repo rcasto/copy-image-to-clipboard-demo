@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo stuff</title>
+</head>
+<body>
+    <div id="html-to-copy">
+        <h1>Copy me, I dare you!</h1>
+        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam facilisis turpis aliquam lectus posuere pulvinar. Nunc orci nisi, imperdiet sed sollicitudin non, aliquet vitae sapien. Sed vitae purus diam. Ut suscipit eu elit ut fermentum. Etiam sed urna quis libero consectetur condimentum a ac risus. Vivamus id viverra felis, porta gravida lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris rhoncus sollicitudin risus, ut pulvinar diam pulvinar a. Nunc malesuada at nibh sit amet molestie. Integer et euismod purus. Curabitur tincidunt a erat sit amet semper.</div>
+    </div>
+
+    <button id="copy-button">Click to copy, I also dare you!</button>
+    
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        const copyButton = document.getElementById('copy-button');
+        const elemToCopy = document.getElementById('html-to-copy');
+
+        copyButton.addEventListener('click', () => {
+            html2canvas(elemToCopy).then(canvas => {
+                canvas.toBlob(async blob => {
+                    try {
+                        await navigator.clipboard.write([
+                            new ClipboardItem({
+                                [blob.type]: blob
+                            })
+                        ])
+                        console.log('Copied image to clipboard successfully!');
+                    } catch (err) {
+                        console.error('Womp womp', err);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
