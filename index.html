@@ -24,6 +24,9 @@
                         await navigator.clipboard.write([
                             new ClipboardItem({
                                 [blob.type]: blob
+                            }),
+                            new ClipboardItem({
+                                ['text/plain']: 'Some text here, alongside the image of course!'
                             })
                         ])
                         console.log('Copied image to clipboard successfully!');
